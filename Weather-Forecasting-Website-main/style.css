@@ -1,0 +1,287 @@
+/* Import modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* -------------------------
+   BACKGROUND IMAGE + LIGHT BLUR
+-------------------------- */
+body {
+  background: url("weather.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+  position: relative;
+}
+
+/* Soft blur + light overlay for readability */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+/* Bring content above blur */
+.app-wrapper, .container, h1 {
+  position: relative;
+  z-index: 2;
+}
+
+/* -------------------------
+   TITLE
+-------------------------- */
+.weather-heading {
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+
+    /* Nice bright color */
+    color: #ffffff;
+
+    /* Glow + depth */
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.35),
+      0 0 18px rgba(255, 255, 255, 0.6);
+
+    /* Smooth entrance animation */
+    animation: fadeInDown 0.6s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* -------------------------
+   CENTER WRAPPER
+-------------------------- */
+.app-wrapper {
+  width: 100%;
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -------------------------
+   MAIN 2-COLUMN CONTAINER
+-------------------------- */
+.container {
+  display: grid;
+  grid-template-columns: 320px 1fr;   /* Left = search, Right = weather */
+  gap: 30px;
+
+  width: 100%;
+  padding: 25px;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 8px 35px rgba(0,0,0,0.18);
+
+  overflow: hidden;    /* prevents anything from going outside container */
+}
+
+/* -------------------------
+   LEFT SIDE (SEARCH PANEL)
+-------------------------- */
+.weather-input {
+  width: 100%;
+  padding: 25px;
+
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(15px);
+
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  color: #000;
+  height: fit-content;
+}
+
+.weather-input h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #000;
+}
+
+.weather-input input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.85);
+  color: #000;
+  font-size: 1rem;
+  outline: none;
+}
+
+.weather-input button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 8px;
+
+    /* Dark sunset gradient */
+    background: linear-gradient(135deg, #D55A1F, #FF8C42);
+    color: #ffffff;
+
+    font-size: 1.1rem;
+    cursor: pointer;
+
+    transition: 0.25s ease-in-out;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+
+/* Hover state: richer, deeper orange with glow */
+.weather-input button:hover {
+    background: linear-gradient(135deg, #C04718, #F97422);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(255, 140, 66, 0.45);
+}
+
+
+.separator {
+  text-align: center;
+  color: #000;
+  opacity: 0.8;
+  margin: 18px 0;
+}
+
+
+/* -------------------------
+   RIGHT SIDE (WEATHER DATA)
+-------------------------- */
+.weather-data {
+  width: 100%;
+  max-width: 750px;    /* keeps cards inside container */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-left: auto;
+}
+
+/* -------------------------
+   CURRENT WEATHER CARD
+-------------------------- */
+.current-weather {
+  width: 100%;
+  padding: 18px 25px;  /* prevents overflow */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(18px);
+
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.20);
+}
+
+.current-weather h2,
+.current-weather h6 {
+  color: #000;
+}
+
+.current-weather img {
+  width: 120px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
+}
+
+/* -------------------------
+   FORECAST TITLE
+-------------------------- */
+.days-forecast h2 {
+  color: #000;
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+}
+
+/* -------------------------
+   5-DAY FORECAST ROW
+-------------------------- */
+.weather-cards {
+  width: 100%;
+  max-width: 750px;      /* prevents overflow exactly */
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 1 row of 5 cards */
+  gap: 20px;
+  justify-items: center;
+}
+
+/* -------------------------
+   FORECAST CARDS
+-------------------------- */
+.card {
+  list-style: none;
+
+  width: 100%;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(14px);
+
+  padding: 18px;
+  text-align: center;
+
+  border-radius: 14px;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card img {
+  width: 60px;
+  margin: 10px 0;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+}
+
+/* -------------------------
+   RESPONSIVENESS
+-------------------------- */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-cards {
+    grid-template-columns: repeat(3, 1fr); /* 2 rows */
+  }
+}
+
+@media (max-width: 600px) {
+  .weather-cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 rows max */
+  }
+}
+.weather-icon {
+  width: 90px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
